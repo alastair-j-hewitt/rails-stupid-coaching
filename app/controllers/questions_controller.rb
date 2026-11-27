@@ -1,22 +1,15 @@
 class QuestionsController < ApplicationController
+  def ask
+  end
 
   def answer
-    # @questions = params["question"]
-    @question = params[:question]
-    if @question != "I am going to work" && @question[-1] != "?"
-      @reply = "I don't care, get dressed and go to work!"
-    elsif @question != "I am going to work" && @question[-1] == "?"
-      @reply = "Silly question, get dressed and go to work!"
-    elsif @question == "I am going to work"
+    @question = params[:question].to_s.strip
+    if @question == "I am going to work"
       @reply = "Great!"
+    elsif @question.end_with?("?")
+      @reply = "Silly question, get dressed and go to work!"
+    else
+      @reply = "I don't care, get dressed and go to work!"
     end
   end
-
-  def ask
-    @question
-  end
-
-  # def create
-  #   render @reply
-  # end
 end
